@@ -23,7 +23,7 @@ const commands = {
         message.reply(`Hello, <@${message.author.id}> (i know your ip)`)
     },
     [`${prefix}annoy`]: async function(message, split){
-        if (split && split[2] && Number.isInteger(Number(split[2])) && Number(split[2]) >= 1){
+        if (split && split[2] && Number.isInteger(Number(split[2])) == true && Number(split[2]) >= 1){
             message.reply("ok")
             for (let i = 1; i >= Number(split[2]); i++){
                 message.channel.send("@everyone")
