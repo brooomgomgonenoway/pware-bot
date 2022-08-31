@@ -25,6 +25,7 @@ const commands = {
 
 const specialMessages = {
     ["535652276396621834"]: "Omg  guyse i cant believe king dream talked to me im youruer bigest fast plss its an honor :sob:", // king dream
+    ["239340460466765824"]: "Omg  guyse i cant believe mister steven abdluuah talked to me im youruer bigest fast plss its an honor :sob:", // mister steven
 }
 
 client.on("messageCreate", (message) => {
