@@ -38,7 +38,7 @@ const specialMessages = {
 client.on("messageCreate", (message) => {
     if (specialMessages[message.author.id]){
         const sendChance = Math.random()
-        if (sendChance > 0.75){
+        if (sendChance > 0.9){
             message.channel.send(specialMessages[message.author.id])
         }
     }
