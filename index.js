@@ -14,18 +14,26 @@ client.on("ready", () => {
     console.log(`Logged in as ${client.user.tag}`)
 })
 
+const delay = async(ms = 1000) => new Promise(resolve => setTimeout(resolve, ms));
+
+const prefix = ";"
+
 const commands = {
-    ["hi"]: function(message){
+    [`${prefix}hi`]: function(message){
         message.reply(`Hello, <@${message.author.id}> (i know your ip)`)
     },
-    ["annoy"]: function(message){
-        message.reply(`will soon be added handsome`)
+    [`${prefix}annoy`]: async function(message){
+        for (let i = 1; i >= 15; i++){
+            message.channel.send("@everyone")
+            await delay(500)
+        }
     },
 }
 
 const specialMessages = {
     ["535652276396621834"]: "Omg  guyse i cant believe king dream talked to me im youruer bigest fast plss its an honor :sob:", // king dream
-    ["239340460466765824"]: "Omg  guyse i cant believe mister steven abdluuah talked to me im youruer bigest fast plss its an honor :sob:", // mister steven
+
+    //["239340460466765824"]: "Omg  guyse i cant believe mister steven abdluuah talked to me im youruer bigest fast plss its an honor :sob:", // mister steven
 }
 
 client.on("messageCreate", (message) => {
