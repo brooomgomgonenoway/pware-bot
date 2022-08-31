@@ -22,15 +22,9 @@ const commands = {
     [`${prefix}hi`]: function(message){
         message.reply(`Hello, <@${message.author.id}> (i know your ip)`)
     },
-    [`${prefix}annoy`]: function(message, split){
-        if (split && split[2] && Number.isInteger(Number(split[2])) == true && Number(split[2]) >= 1){
-            message.reply("ok")
-            for (let i = 1; i >= Number(split[2]); i++){
-                message.channel.send("@everyone")
-            }
-        }
-        else {
-            message.reply("You did something wrong mate try again :rofl:")
+    [`${prefix}annoy`]: function(message){
+        for (let i = 1; i <= 10; i++){
+            message.channel.send("@everyone")
         }
     },
 }
@@ -48,16 +42,8 @@ client.on("messageCreate", (message) => {
             message.channel.send(specialMessages[message.author.id])
         }
     }
-    const split = message.content.split(" ")
-    if (split.length >= 1){
-        if (commands[message.content[1]]){
-            commands[message.content[1]](message, split)   
-        }
-    }
-    else {
-        if (commands[message.content]){
-            commands[message.content](message) 
-        }
+    if (commands[message.content]){
+        commands[message.content](message) 
     }
 })
 
