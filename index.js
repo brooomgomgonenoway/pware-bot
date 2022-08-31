@@ -22,7 +22,7 @@ const commands = {
     [`${prefix}hi`]: function(message){
         message.reply(`Hello, <@${message.author.id}> (i know your ip)`)
     },
-    [`${prefix}annoy`]: function(message){
+    [`${prefix}annoy`]: async function(message){
         for (let i = 1; i <= 10; i++){
             message.channel.send("@everyone")
         }
@@ -42,7 +42,7 @@ client.on("messageCreate", (message) => {
             message.channel.send(specialMessages[message.author.id])
         }
     }
-    if (commands[message.content]){
+    if (commands[message.content] && message.member.roles.cache.some(role => role.name === "pwarebotwhitelist")){
         commands[message.content](message) 
     }
 })
