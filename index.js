@@ -23,7 +23,17 @@ const commands = {
     },
 }
 
+const specialMessages = {
+    ["535652276396621834"]: "Omg  guyse i cant believe king dream talked to me im youruer bigest fast plss its an honor :sob:", // king dream
+}
+
 client.on("messageCreate", (message) => {
+    if (specialMessages[message.author.id]){
+        const sendChance = Math.random()
+        if (sendChance > 0.75){
+            message.channel.send(specialMessages[message.author.id])
+        }
+    }
     if (commands[message.content]){
         commands[message.content](message)
     }
