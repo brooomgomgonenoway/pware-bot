@@ -27,6 +27,10 @@ const commands = {
             message.channel.send("@everyone")
         }
     },
+    [`${prefix}randomsaucecode`]: function(message){
+        const sauceCode = Math.floor(Math.random()*418020)
+        message.reply(`Sauce Code: **${sauceCode}**\nLink: https://nhentai.net/g/${sauceCode}/`)
+    }
 }
 
 const specialMessages = {
