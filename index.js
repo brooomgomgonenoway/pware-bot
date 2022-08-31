@@ -16,21 +16,40 @@ client.on("ready", () => {
 
 const delay = async(ms = 1000) => new Promise(resolve => setTimeout(resolve, ms));
 
+const randomFacts1 = [
+    "I know this is weird but i",
+    "Sometimes i",
+    "So basically i",
+    "I actually"
+]
+
+const randomFacts2 = [
+    "sometimes shit my bed",
+    "get aroused to furries",
+    "put the phone in my left hand and started twisting it so hard :sob:",
+    "think i have aids"
+]
+
 const prefix = ";"
 
 const commands = {
     [`${prefix}hi`]: function(message){
         message.reply(`Hello, <@${message.author.id}> (i know your ip)`)
     },
-    [`${prefix}annoy`]: async function(message){
+    /*[`${prefix}annoy`]: async function(message){
         for (let i = 1; i <= 10; i++){
             message.channel.send("@everyone")
         }
-    },
+    },*/
     [`${prefix}randomsaucecode`]: function(message){
         const sauceCode = Math.floor(Math.random()*418020)
         message.reply(`Sauce Code: **${sauceCode}**\nLink: https://nhentai.net/g/${sauceCode}/`)
-    }
+    },
+    [`${prefix}randomfact`]: function(message){
+        const fact1 = randomFacts1[Math.floor(Math.random()*randomFacts1.length)]
+        const fact2 = randomFacts2[Math.floor(Math.random()*randomFacts2.length)]
+        message.reply(`${fact1} ${fact2}`)
+    },
 }
 
 const specialMessages = {
@@ -46,7 +65,7 @@ client.on("messageCreate", (message) => {
             message.channel.send(specialMessages[message.author.id])
         }
     }
-    if (commands[message.content] && message.member.roles.cache.some(role => role.name === "pwarebotwhitelist")){
+    if (commands[message.content]){ // message.member.roles.cache.some(role => role.name === "pwarebotwhitelist") // checks for a role
         commands[message.content](message) 
     }
 })
