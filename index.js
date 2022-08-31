@@ -29,4 +29,10 @@ client.on("messageCreate", (message) => {
     }
 })
 
+const welcomeChannelId = "1014612524173373520"
+
+client.on("guildMemberAdd", (member) => {
+    member.guild.channels.cache.get(welcomeChannelId).send(`<@${member.id}> Bro really joinned the server ong frrrr :sob: :skull:`)
+})
+
 client.login(process.env.TOKEN)
