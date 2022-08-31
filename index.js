@@ -48,9 +48,16 @@ client.on("messageCreate", (message) => {
             message.channel.send(specialMessages[message.author.id])
         }
     }
-    if (commands[message.content]){
-        const split = message.content.split(" ")
-        commands[message.content](message, split)
+    const split = message.content.split(" ")
+    if (typeof(split[1]) == "string"){
+        if (commands[message.content[1]]){
+            commands[message.content[1]](message[1], split)   
+        }
+    }
+    else {
+        if (commands[message.content]){
+            commands[message.content](message) 
+        }
     }
 })
 
