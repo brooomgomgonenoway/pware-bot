@@ -86,7 +86,7 @@ const commands = {
         const fact2 = randomFacts2[Math.floor(Math.random()*randomFacts2.length)]
         message.reply(`${fact1} ${fact2}`)
     },
-    [`${prefix}requestwebtest`]: function(message){
+    /*[`${prefix}requestwebtest`]: function(message){
         //let getGayManga;
         let webInfo = "";
         let gaylink = "";
@@ -104,10 +104,10 @@ const commands = {
         }
         
         while (gaylink == ""){
-            await getGayManga()
+            getGayManga()
         }
         console.log(gaylink)
-    },
+    },*/
 }
 
 const specialMessages = {
