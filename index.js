@@ -22,7 +22,7 @@ const commands = {
     [`${prefix}hi`]: function(message){
         message.reply(`Hello, <@${message.author.id}> (i know your ip)`)
     },
-    [`${prefix}annoy`]: async function(message, split){
+    [`${prefix}annoy`]: function(message, split){
         if (split && split[2] && Number.isInteger(Number(split[2])) == true && Number(split[2]) >= 1){
             message.reply("ok")
             for (let i = 1; i >= Number(split[2]); i++){
