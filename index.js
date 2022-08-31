@@ -1,4 +1,5 @@
 const Discord = require("discord.js")
+const https = require("https")
 require("dotenv").config()
 
 const client = new Discord.Client({
@@ -13,6 +14,36 @@ const client = new Discord.Client({
 client.on("ready", () => {
     console.log(`Logged in as ${client.user.tag}`)
 })
+
+function httpGet(url) {
+    return new Promise((resolve, reject) => {
+      const http = require('http'),
+        https = require('https');
+  
+      let client = http;
+  
+      if (url.toString().indexOf("https") === 0) {
+        client = https;
+      }
+  
+      client.get(url, (resp) => {
+        let chunks = [];
+  
+        // A chunk of data has been recieved.
+        resp.on('data', (chunk) => {
+          chunks.push(chunk);
+        });
+  
+        // The whole response has been received. Print out the result.
+        resp.on('end', () => {
+          resolve(Buffer.concat(chunks));
+        });
+  
+      }).on("error", (err) => {
+        reject(err);
+      });
+    });
+}
 
 const delay = async(ms = 1000) => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -42,13 +73,42 @@ const commands = {
         }
     },*/
     [`${prefix}randomsaucecode`]: function(message){
-        const sauceCode = Math.floor(Math.random()*418020)
-        message.reply(`Sauce Code: **${sauceCode}**\nLink: https://nhentai.net/g/${sauceCode}/`)
+        if (message.channel.nsfw){
+            const sauceCode = Math.floor(Math.random()*418020)
+            message.reply(`Sauce Code: **${sauceCode}**\nLink: https://nhentai.net/g/${sauceCode}/`)
+        }
+        else {
+            message.reply("You can only use this command in an NSFW channel.")
+        }
     },
     [`${prefix}randomfact`]: function(message){
         const fact1 = randomFacts1[Math.floor(Math.random()*randomFacts1.length)]
         const fact2 = randomFacts2[Math.floor(Math.random()*randomFacts2.length)]
         message.reply(`${fact1} ${fact2}`)
+    },
+    [`${prefix}requestwebtest`]: function(message){
+        //let getGayManga;
+        let webInfo = "";
+        let gaylink = "";
+        let getGayManga = function(){
+            const randomsauce = Math.floor(Math.random()*402314);
+            let currentlink = `https://nhentai.to/g/${randomsauce}`
+            (async(url) => {
+                var buf = await httpGet(url);
+                webInfo = buf.toString('utf-8');
+            })(currentlink);
+            if(!webInfo.search("yaoi")){
+                getGayManga()
+            }
+            else {
+                gaylink = currentlink
+            }
+        }
+        
+        while (gaylink == ""){
+            getGayManga()
+        }
+        console.log(gaylink)
     },
 }
 
@@ -67,6 +127,7 @@ client.on("messageCreate", (message) => {
     }
     if (commands[message.content]){ // message.member.roles.cache.some(role => role.name === "pwarebotwhitelist") // checks for a role
         commands[message.content](message) 
+        
     }
 })
 
