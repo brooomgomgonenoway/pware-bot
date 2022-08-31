@@ -1,5 +1,5 @@
 const Discord = require("discord.js")
-const https = require("https")
+//const https = require("https")
 require("dotenv").config()
 
 const client = new Discord.Client({
@@ -90,23 +90,21 @@ const commands = {
         //let getGayManga;
         let webInfo = "";
         let gaylink = "";
-        let getGayManga = function(){
-            const randomsauce = Math.floor(Math.random()*402314);
-            let currentlink = `https://nhentai.to/g/${randomsauce}`
-            (async(url) => {
-                var buf = await httpGet(url);
-                webInfo = buf.toString('utf-8');
-            })(currentlink);
-            if(!webInfo.search("yaoi")){
-                getGayManga()
+        async function getGayManga() {
+            let randomsauce = Math.floor(Math.random() * 402314)
+            let currentlink = `https://nhentai.to/g/${randomsauce}`(async (url) => {
+                var buf = await httpGet(url)
+                webInfo = buf.toString('utf-8')
+            })(currentlink)
+            if (webInfo.search("yaoi")) {
+                gaylink = currentlink
             }
             else {
-                gaylink = currentlink
             }
         }
         
         while (gaylink == ""){
-            getGayManga()
+            await getGayManga()
         }
         console.log(gaylink)
     },
