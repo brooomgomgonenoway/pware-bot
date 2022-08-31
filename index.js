@@ -15,7 +15,7 @@ client.on("ready", () => {
     console.log(`Logged in as ${client.user.tag}`)
 })
 
-function httpGet(url) {
+/*function httpGet(url) {
     return new Promise((resolve, reject) => {
       const http = require('http'),
         https = require('https');
@@ -43,7 +43,7 @@ function httpGet(url) {
         reject(err);
       });
     });
-}
+}*/
 
 const delay = async(ms = 1000) => new Promise(resolve => setTimeout(resolve, ms));
 
