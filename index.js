@@ -49,7 +49,7 @@ client.on("messageCreate", (message) => {
         }
     }
     const split = message.content.split(" ")
-    if (typeof(split[1]) == "string"){
+    if (split.length >= 1){
         if (commands[message.content[1]]){
             commands[message.content[1]](message, split)   
         }
